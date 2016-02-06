@@ -32,81 +32,84 @@ elseif (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 if(USE_CHIPMUNK)
-  message("Using chipmunk ...")
-  add_definitions(-DCC_ENABLE_CHIPMUNK_INTEGRATION=1)
-  if(UNIX) # assuming linux
-    add_definitions(-DLINUX )
-  endif()
+	message("Using chipmunk ...")
+	add_definitions(-DCC_ENABLE_CHIPMUNK_INTEGRATION=1)
+
+	if(UNIX) # assuming linux
+	    add_definitions(-DLINUX )
+	endif()
+
 elseif(USE_BOX2D)
-  message("Using box2d ...")
-  add_definitions(-DCC_ENABLE_BOX2D_INTEGRATION=1)
-  if(UNIX) # assuming linux
-    add_definitions(-DLINUX )
-  endif()
+	message("Using box2d ...")
+	add_definitions(-DCC_ENABLE_BOX2D_INTEGRATION=1)
+	if(UNIX) # assuming linux
+    		add_definitions(-DLINUX )
+  	endif()
+  	
 else(USE_CHIPMUNK)
-  message(FATAL_ERROR "Must choose a physics library.")
+  	message(FATAL_ERROR "Must choose a physics library.")
 endif(USE_CHIPMUNK)
 
 # architecture
 if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-set(ARCH_DIR "64-bit")
-else()
-set(ARCH_DIR "32-bit")
+	set(ARCH_DIR "64-bit")
+	else()
+	set(ARCH_DIR "32-bit")
 endif()
 
 if( UNIX ) #assume linux
-set(GAME_SRC
-  proj.linux/main.cpp
-  Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
-)
+	set(GAME_SRC
+	  proj.linux/main.cpp
+	  Classes/AppDelegate.cpp
+	  Classes/HelloWorldScene.cpp
+	)
 elseif ( WIN32 )
-set(GAME_SRC
-  proj.win32/main.cpp
-  proj.win32/main.h
-  proj.win32/resource.h
-  Classes/AppDelegate.cpp
-  Classes/HelloWorldScene.cpp
-)
+	set(GAME_SRC
+	  proj.win32/main.cpp
+	  proj.win32/main.h
+	  proj.win32/resource.h
+	  Classes/AppDelegate.cpp
+	  Classes/HelloWorldScene.cpp
+	)
 endif()
 
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
 if (WIN32)
-include_directories(
-  ${COCOS2D_ROOT}
-  ${COCOS2D_ROOT}/cocos
-  ${COCOS2D_ROOT}/cocos/audio/include
-  ${COCOS2D_ROOT}/cocos/2d
-  ${COCOS2D_ROOT}/cocos/2d/renderer
-  ${COCOS2D_ROOT}/cocos/2d/platform
-  ${COCOS2D_ROOT}/cocos/2d/platform/desktop
-  ${COCOS2D_ROOT}/cocos/2d/platform/win32
-  ${COCOS2D_ROOT}/cocos/base
-  ${COCOS2D_ROOT}/cocos/deprecated
-  ${COCOS2D_ROOT}/cocos/physics
-  ${COCOS2D_ROOT}/cocos/editor-support
-  ${COCOS2D_ROOT}/cocos/math
-  ${COCOS2D_ROOT}/extensions
-  ${COCOS2D_ROOT}/external
-  ${COCOS2D_ROOT}/external/edtaa3func
-  ${COCOS2D_ROOT}/external/jpeg/include/win32
-  ${COCOS2D_ROOT}/external/png/include/win32
-  ${COCOS2D_ROOT}/external/tiff/include/win32
-  ${COCOS2D_ROOT}/external/webp/include/win32
-  ${COCOS2D_ROOT}/external/curl/include/win32
-  ${COCOS2D_ROOT}/external/tinyxml2
-  ${COCOS2D_ROOT}/external/unzip
-  ${COCOS2D_ROOT}/external/sqlite3/include
-  ${COCOS2D_ROOT}/external/chipmunk/include/chipmunk
-  ${COCOS2D_ROOT}/external/freetype2/include/win32
-  ${COCOS2D_ROOT}/external/websockets/include/win32
-  ${COCOS2D_ROOT}/external/spidermonkey/include/win32
-  ${COCOS2D_ROOT}/external/glfw3/include/win32
-  ${COCOS2D_ROOT}/external/win32-specific/gles/include/OGLES
-  ${COCOS2D_ROOT}/external/win32-specific/icon/include
-  ${COCOS2D_ROOT}/external/win32-specific/zlib/include
-  ${COCOS2D_ROOT}/external/xxhash
-)
+	include_directories(
+	  ${COCOS2D_ROOT}
+	  ${COCOS2D_ROOT}/cocos
+	  ${COCOS2D_ROOT}/cocos/audio/include
+	  ${COCOS2D_ROOT}/cocos/2d
+	  ${COCOS2D_ROOT}/cocos/2d/renderer
+	  ${COCOS2D_ROOT}/cocos/2d/platform
+	  ${COCOS2D_ROOT}/cocos/2d/platform/desktop
+	  ${COCOS2D_ROOT}/cocos/2d/platform/win32
+	  ${COCOS2D_ROOT}/cocos/base
+	  ${COCOS2D_ROOT}/cocos/deprecated
+	  ${COCOS2D_ROOT}/cocos/physics
+	  ${COCOS2D_ROOT}/cocos/editor-support
+	  ${COCOS2D_ROOT}/cocos/math
+	  ${COCOS2D_ROOT}/extensions
+	  ${COCOS2D_ROOT}/external
+	  ${COCOS2D_ROOT}/external/edtaa3func
+	  ${COCOS2D_ROOT}/external/jpeg/include/win32
+	  ${COCOS2D_ROOT}/external/png/include/win32
+	  ${COCOS2D_ROOT}/external/tiff/include/win32
+	  ${COCOS2D_ROOT}/external/webp/include/win32
+	  ${COCOS2D_ROOT}/external/curl/include/win32
+	  ${COCOS2D_ROOT}/external/tinyxml2
+	  ${COCOS2D_ROOT}/external/unzip
+	  ${COCOS2D_ROOT}/external/sqlite3/include
+	  ${COCOS2D_ROOT}/external/chipmunk/include/chipmunk
+	  ${COCOS2D_ROOT}/external/freetype2/include/win32
+	  ${COCOS2D_ROOT}/external/websockets/include/win32
+	  ${COCOS2D_ROOT}/external/spidermonkey/include/win32
+	  ${COCOS2D_ROOT}/external/glfw3/include/win32
+	  ${COCOS2D_ROOT}/external/win32-specific/gles/include/OGLES
+	  ${COCOS2D_ROOT}/external/win32-specific/icon/include
+	  ${COCOS2D_ROOT}/external/win32-specific/zlib/include
+	  ${COCOS2D_ROOT}/external/xxhash
+	)
 link_directories(
   /usr/local/lib
   ${COCOS2D_ROOT}/external/png/prebuilt/win32
