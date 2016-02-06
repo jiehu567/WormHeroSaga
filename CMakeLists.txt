@@ -15,6 +15,7 @@ else(DEBUG_MODE)
   set(CMAKE_BUILD_TYPE RELEASE)
 endif(DEBUG_MODE)
 
+# Set physical world model
 if (MSVC)
 	set(CMAKE_C_FLAGS_DEBUG "-DCOCOS2D_DEBUG=1")
 	set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
@@ -73,6 +74,7 @@ elseif ( WIN32 )
 	)
 endif()
 
+# Environment setting
 set(COCOS2D_ROOT ${CMAKE_SOURCE_DIR}/cocos2d)
 if (WIN32)
 	include_directories(
@@ -110,6 +112,7 @@ if (WIN32)
 	  ${COCOS2D_ROOT}/external/win32-specific/zlib/include
 	  ${COCOS2D_ROOT}/external/xxhash
 	)
+	
 link_directories(
   /usr/local/lib
   ${COCOS2D_ROOT}/external/png/prebuilt/win32
